@@ -1,10 +1,9 @@
 package sample.models.monsters;
 
 import sample.models.actions.Attack;
+import sample.models.magics.*;
 
-import java.util.function.ToDoubleBiFunction;
-
-public class BasicMonster implements Attack {
+public class BasicMonster implements Attack, HealTheWorld, MoveMagic, DefenceUp, AttackOn, Warrrr {
 
     protected int attackPower;
     protected int defencePower;
@@ -14,6 +13,11 @@ public class BasicMonster implements Attack {
     private int positionX;
     private int positionY;
     private boolean moveForward = true;
+    private boolean attackTwice = false;
+
+    private int currAttackPower;
+    private int currDefencePower;
+    private boolean diesThisTurn = false;
 
     protected BasicMonster(int attackPower, int defencePower,
                            int magicPower, int speed) {
@@ -21,22 +25,24 @@ public class BasicMonster implements Attack {
         this.defencePower = defencePower;
         this.magicPower = magicPower;
         this.speed = speed;
+        currAttackPower = attackPower;
+        currDefencePower = attackPower;
     }
 
     protected int getAttackPower() {
-        return attackPower;
+        return currAttackPower;
     }
 
     protected void setAttackPower(int attackPower) {
-        this.attackPower = attackPower;
+        this.currAttackPower = attackPower;
     }
 
     protected int getDefencePower() {
-        return defencePower;
+        return currDefencePower;
     }
 
     protected void setDefencePower(int defencePower) {
-        this.defencePower = defencePower;
+        this.currDefencePower = defencePower;
     }
 
     protected int getMagicPower() {
@@ -145,14 +151,51 @@ public class BasicMonster implements Attack {
                 || this.positionY == basicMonster.positionY - 1)) {
 
             if(getAttackPower() > basicMonster.getDefencePower()) {
-                //TODO kill basicMonster
+                basicMonster.diesThisTurn = true;
             } else {
                 basicMonster.setDefencePower(basicMonster.getDefencePower() - getAttackPower());
-                //TODO kill this
+                this.diesThisTurn = true;
             }
             return true;
         } else {
             return false;
         }
+    }
+
+    public boolean doesAttackTwice() {
+        return attackTwice;
+    }
+
+    public void setAttackTwice() {
+        this.attackTwice = true;
+    }
+
+    public void setAttackOnce() {
+        this.attackTwice = false;
+    }
+
+    @Override
+    public void moveMagic(int x, int y) {
+        this.moveToPosition(x, y);
+    }
+
+    @Override
+    public void attackOn() {
+        setAttackTwice();
+    }
+
+    @Override
+    public void heal(){
+        this.diesThisTurn = false;
+    }
+
+    @Override
+    public void defenceUp() {
+        this.currDefencePower = defencePower;
+    }
+
+    @Override
+    public void warTime() {
+        this.currAttackPower *= 2;
     }
 }

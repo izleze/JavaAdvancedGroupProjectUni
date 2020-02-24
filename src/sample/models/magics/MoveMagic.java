@@ -1,11 +1,10 @@
 package sample.models.magics;
 
-public interface MoveMagic extends BasicMagic{
+public interface MoveMagic {
 
-    void moveMagic();
+    void moveMagic(int x, int y);
 
-    @Override
-    default int requiresMagicPoints() {
+    default int moveMagicRequiresMagicPoints() {
         return 10;
     }
 }

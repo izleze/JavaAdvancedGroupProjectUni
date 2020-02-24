@@ -1,11 +1,10 @@
 package sample.models.magics;
 
-public interface Warrrr extends BasicMagic{
+public interface Warrrr {
 
     void warTime();
 
-    @Override
-    default int requiresMagicPoints() {
+    default int warRequiresMagicPoints() {
         return 20;
     }
 }

@@ -1,11 +1,10 @@
 package sample.models.magics;
 
-public interface DefenceUp extends BasicMagic{
+public interface DefenceUp {
 
     void defenceUp();
 
-    @Override
-    default int requiresMagicPoints() {
+    default int defenceUpRequiresMagicPoints() {
         return 10;
     }
 }

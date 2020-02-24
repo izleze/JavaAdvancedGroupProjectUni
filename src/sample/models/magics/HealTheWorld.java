@@ -1,11 +1,10 @@
 package sample.models.magics;
 
-public interface HealTheWorld extends BasicMagic{
+public interface HealTheWorld {
 
     void heal();
 
-    @Override
-    default int requiresMagicPoints() {
+    default int healTheWorldRequiresMagicPoints() {
         return 20;
     }
 }
