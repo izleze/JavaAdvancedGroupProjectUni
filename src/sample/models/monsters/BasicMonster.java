@@ -29,68 +29,68 @@ public class BasicMonster implements Attack, HealTheWorld, MoveMagic, DefenceUp,
         currDefencePower = attackPower;
     }
 
-    protected int getAttackPower() {
+    public int getAttackPower() {
         return currAttackPower;
     }
 
-    protected void setAttackPower(int attackPower) {
+    public void setAttackPower(int attackPower) {
         this.currAttackPower = attackPower;
     }
 
-    protected int getDefencePower() {
+    public int getDefencePower() {
         return currDefencePower;
     }
 
-    protected void setDefencePower(int defencePower) {
+    public void setDefencePower(int defencePower) {
         this.currDefencePower = defencePower;
     }
 
-    protected int getMagicPower() {
+    public int getMagicPower() {
         return magicPower;
     }
 
-    protected void setMagicPower(int magicPower) {
+    public void setMagicPower(int magicPower) {
         this.magicPower = magicPower;
     }
 
-    protected int getSpeed() {
+    public int getSpeed() {
         return speed;
     }
 
-    protected void setSpeed(int speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 
-    protected int getPositionX() {
+    public int getPositionX() {
         return positionX;
     }
 
-    protected void setPositionX(int positionX) {
+    public void setPositionX(int positionX) {
         this.positionX = positionX;
     }
 
-    protected int getPositionY() {
+    public int getPositionY() {
         return positionY;
     }
 
-    protected void setPositionY(int positionY) {
+    public void setPositionY(int positionY) {
         this.positionY = positionY;
     }
 
-    protected void setMoveForward(boolean moveForward) {
+    public void setMoveForward(boolean moveForward) {
         this.moveForward = moveForward;
     }
 
-    protected void moveToPosition(int x, int y) {
+    public void moveToPosition(int x, int y) {
         positionX = x;
         positionY = y;
     }
 
-    protected void moveX(int x) {
+    public void moveX(int x) {
         positionX = x;
     }
 
-    protected void moveY(int y) {
+    public void moveY(int y) {
         positionY = y;
     }
 
@@ -120,7 +120,7 @@ public class BasicMonster implements Attack, HealTheWorld, MoveMagic, DefenceUp,
         positionY -= y;
     }
 
-    protected void moveForwardOnce() {
+    public void moveForwardOnce() {
         if (moveForward) {
             increaseX();
         } else {
@@ -128,7 +128,7 @@ public class BasicMonster implements Attack, HealTheWorld, MoveMagic, DefenceUp,
         }
     }
 
-    protected void moveForwardWithDefaultSpeed() {
+    public void moveForwardWithDefaultSpeed() {
         if (moveForward) {
             increaseX(this.speed);
         } else {
@@ -136,7 +136,7 @@ public class BasicMonster implements Attack, HealTheWorld, MoveMagic, DefenceUp,
         }
     }
 
-    protected void moveForwardWithSpeed(int speed) {
+    public void moveForwardWithSpeed(int speed) {
         if (moveForward) {
             increaseX(speed);
         } else {

@@ -1,36 +1,43 @@
 package sample.models.deck;
 
 import sample.models.magics.BasicMagic;
-import sample.models.magics.impl.AttackOnImpl;
+import sample.models.magics.impl.*;
 import sample.models.monsters.*;
 
 import java.util.*;
 
 public class Deck {
 
-    private final List<BasicMonster> monsters = Arrays.asList(
-            new DogEatingBug(),
-            new DogEatingBug(),
-            new DogEatingBug(),
-            new DrunkenKnight(),
-            new DrunkenKnight(),
-            new DrunkenKnight(),
-            new MagicCat(),
-            new MagicCat(),
-            new MagicCat(),
-            new ReclesCannibal(),
-            new ReclesCannibal(),
-            new ReclesCannibal(),
-            new SandTurtle(),
-            new SandTurtle(),
-            new SandTurtle(),
-            new SophisticatedSam(),
-            new SophisticatedSam(),
-            new SophisticatedSam()
-    );
+    private List<BasicMonster> monsters = new ArrayList<>();
 
-    private Set<BasicMagic> magics = Set.copyOf(Arrays.asList(
-            new AttackOnImpl()
+    {
+        monsters.addAll(Arrays.asList(
+                new DogEatingBug(),
+                new DogEatingBug(),
+                new DogEatingBug(),
+                new DrunkenKnight(),
+                new DrunkenKnight(),
+                new DrunkenKnight(),
+                new MagicCat(),
+                new MagicCat(),
+                new MagicCat(),
+                new ReclesCannibal(),
+                new ReclesCannibal(),
+                new ReclesCannibal(),
+                new SandTurtle(),
+                new SandTurtle(),
+                new SandTurtle(),
+                new SophisticatedSam(),
+                new SophisticatedSam(),
+                new SophisticatedSam()));
+    }
+
+    private final Set<BasicMagic> magics = Set.copyOf(Arrays.asList(
+            new AttackOnImpl(),
+            new DefenceUpImpl(),
+            new HealTheWorldImpl(),
+            new MoveMagicImpl(),
+            new WarrrrImpl()
     ));
 
     public List<BasicMonster> drawInitialMonsters() {
@@ -42,9 +49,15 @@ public class Deck {
     }
 
     public BasicMonster getRandomMonster() {
-        int randomNumber = new Random().nextInt() % monsters.size();
+        int randomNumber = new Random().nextInt(monsters.size());
         BasicMonster basicMonster = monsters.get(randomNumber);
-        monsters.remove(randomNumber);
+        monsters.remove(basicMonster);
         return basicMonster;
+    }
+
+    public Optional<BasicMagic> getRandomMagic() {
+        return magics
+                .stream()
+                .findAny();
     }
 }
