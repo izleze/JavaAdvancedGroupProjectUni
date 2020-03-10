@@ -21,4 +21,9 @@ public class DefenceUpImpl implements DefenceUp, BasicMagic {
     public void doMagic() {
         defenceUp();
     }
+
+    @Override
+    public int magicPoints() {
+        return defenceUpRequiresMagicPoints();
+    }
 }

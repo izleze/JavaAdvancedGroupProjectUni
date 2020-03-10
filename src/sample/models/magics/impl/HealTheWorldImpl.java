@@ -18,6 +18,11 @@ public class HealTheWorldImpl implements HealTheWorld, BasicMagic {
     }
 
     @Override
+    public int magicPoints() {
+        return healTheWorldRequiresMagicPoints();
+    }
+
+    @Override
     public void heal() {
         healedMonster.heal();
     }

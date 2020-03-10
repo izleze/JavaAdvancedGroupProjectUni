@@ -18,6 +18,11 @@ public class WarrrrImpl implements Warrrr, BasicMagic {
     }
 
     @Override
+    public int magicPoints() {
+        return warRequiresMagicPoints();
+    }
+
+    @Override
     public void warTime() {
         gearUpMonster.warTime();
     }

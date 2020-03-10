@@ -24,4 +24,9 @@ public class AttackOnImpl implements AttackOn, BasicMagic {
     public void doMagic() {
         attackOn();
     }
+
+    @Override
+    public int magicPoints() {
+        return attackOnRequiresMagicPoints();
+    }
 }

@@ -28,6 +28,11 @@ public class MoveMagicImpl implements MoveMagic, BasicMagic {
     }
 
     @Override
+    public int magicPoints() {
+        return moveMagicRequiresMagicPoints();
+    }
+
+    @Override
     public void moveMagic(int x, int y) {
         moveMonster.moveMagic(x, y);
     }

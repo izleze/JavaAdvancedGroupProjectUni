@@ -50,14 +50,19 @@
             <HBox prefHeight="125.0" prefWidth="200.0">
                <children>
                   <HBox id="monstersPlayer2" fx:id="monstersPlayer2" prefHeight="100.0" prefWidth="575.0" />
-                  <HBox id="magicPlayer2" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="565.0" />
+                  <HBox id="magicPlayer2" fx:id="magicCards2" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="565.0" />
                </children>
             </HBox>
             <HBox alignment="TOP_CENTER">
                <children>
-                  <Label id="player2Name" alignment="CENTER" prefHeight="29.0" prefWidth="214.0" text="Player 2 " textAlignment="CENTER">
+                  <Label id="player2Name" fx:id="Player2" alignment="CENTER" prefHeight="29.0" prefWidth="214.0" text="Player 2 " textAlignment="CENTER">
                      <font>
                         <Font size="39.0" />
+                     </font>
+                  </Label>
+                  <Label id="player2Name" fx:id="randomNum2" alignment="CENTER" layoutX="457.0" layoutY="10.0" prefHeight="47.0" prefWidth="276.0" text="Random num: " textAlignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
                      </font>
                   </Label>
                   <Label text="Magic Power:">
@@ -65,7 +70,7 @@
                         <Font size="39.0" />
                      </font>
                   </Label>
-                  <Label id="magicPowerPlayer2" fx:id="magicPlayer2" text="dummy">
+                  <Label id="magicPowerPlayer2" fx:id="magicPlayer2">
                      <font>
                         <Font size="39.0" />
                      </font>
@@ -83,9 +88,14 @@
          <children>
             <HBox alignment="TOP_CENTER">
                <children>
-                  <Label id="player1Name" alignment="CENTER" ellipsisString="" prefHeight="43.0" prefWidth="176.0" text="Player 1 " textAlignment="CENTER">
+                  <Label id="player1Name" fx:id="Player1" alignment="CENTER" ellipsisString="" prefHeight="43.0" prefWidth="176.0" text="Player 1 " textAlignment="CENTER">
                      <font>
                         <Font size="39.0" />
+                     </font>
+                  </Label>
+                  <Label id="player2Name" fx:id="randomNum1" alignment="CENTER" prefHeight="47.0" prefWidth="276.0" text="Random num: " textAlignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
                      </font>
                   </Label>
                   <Label text="Magic Power:">
@@ -93,7 +103,7 @@
                         <Font size="39.0" />
                      </font>
                   </Label>
-                  <Label id="magicPowerPlayer1" fx:id="magicPlayer1" text="dummy">
+                  <Label id="magicPowerPlayer1" fx:id="magicPlayer1">
                      <font>
                         <Font size="39.0" />
                      </font>
@@ -106,18 +116,27 @@
             <HBox prefHeight="125.0" prefWidth="200.0">
                <children>
                   <HBox id="monstersPlayer1" fx:id="monstersPlayer1" prefHeight="100.0" prefWidth="575.0" />
-                  <HBox id="magicPlayer1" prefHeight="100.0" prefWidth="565.0" />
+                  <HBox id="magicPlayer1" fx:id="magicCards1" prefHeight="100.0" prefWidth="565.0" />
                </children>
             </HBox>
          </children>
       </VBox>
    </bottom>
    <left>
-      <Button fx:id="startGame" mnemonicParsing="false" prefHeight="86.0" prefWidth="189.0" text="Start the game" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="startGame" mnemonicParsing="false" onMouseClicked="#startGame" prefHeight="86.0" prefWidth="189.0" text="Start the game">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="placeMonster" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="189.0" text="PlaceMonsters">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
    </left>
    <right>
       <VBox BorderPane.alignment="CENTER">
@@ -127,7 +146,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="timer" prefHeight="43.0" prefWidth="141.0" text="Time" textFill="#ee3603">
+            <Label fx:id="timer" contentDisplay="CENTER" disable="true" prefHeight="43.0" prefWidth="141.0" text="180" textAlignment="CENTER" textFill="#ee3603">
                <font>
                   <Font size="20.0" />
                </font>
