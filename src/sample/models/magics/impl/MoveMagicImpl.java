@@ -18,7 +18,8 @@ public class MoveMagicImpl implements MoveMagic, BasicMagic {
         this.posY = posY;
     }
 
-    public void setMoveMonster(BasicMonster moveMonster) {
+    @Override
+    public void setMonster(BasicMonster moveMonster) {
         this.moveMonster = moveMonster;
     }
 

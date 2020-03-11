@@ -9,5 +9,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="javafx" level="application" />
+    <orderEntry type="library" name="jackson-core-2.9.9" level="application" />
+    <orderEntry type="library" name="jackson-databind-2.9.9" level="application" />
+    <orderEntry type="library" name="jackson-annotations-2.9.9" level="application" />
   </component>
 </module>

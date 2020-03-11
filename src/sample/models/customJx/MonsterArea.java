@@ -1,15 +1,17 @@
 package sample.models.customJx;
 
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Button;
+import javafx.scene.text.Font;
 import sample.models.monsters.BasicMonster;
 
-public class MonsterArea extends TextArea {
+public class MonsterArea extends Button {
 
     private BasicMonster basicMonster;
 
     public MonsterArea() {}
 
     public MonsterArea(BasicMonster monster) {
+        super.setFont(Font.font(10));
         this.basicMonster = monster;
     }
 

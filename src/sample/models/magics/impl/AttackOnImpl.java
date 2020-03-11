@@ -16,7 +16,8 @@ public class AttackOnImpl implements AttackOn, BasicMagic {
         monsterAttackOn.attackOn();
     }
 
-    public void setMonsterAttackOn(BasicMonster monsterAttackOn) {
+    @Override
+    public void setMonster(BasicMonster monsterAttackOn) {
         this.monsterAttackOn = monsterAttackOn;
     }
 

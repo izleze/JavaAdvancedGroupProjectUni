@@ -64,6 +64,20 @@
             </HBox>
             <HBox alignment="TOP_CENTER">
                <children>
+                  <VBox>
+                     <children>
+                        <Label id="player2Name" fx:id="deck2" alignment="CENTER" prefHeight="29.0" prefWidth="214.0" text="Monsters in deck:" textAlignment="CENTER">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label id="player2Name" fx:id="killedMonsters2" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="29.0" prefWidth="214.0" text="Killed Monsters: " textAlignment="CENTER">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                   <Label id="player2Name" fx:id="Player2" alignment="CENTER" prefHeight="29.0" prefWidth="214.0" text="Player 2 " textAlignment="CENTER">
                      <font>
                         <Font size="39.0" />
@@ -97,6 +111,20 @@
          <children>
             <HBox alignment="TOP_CENTER">
                <children>
+                  <VBox>
+                     <children>
+                        <Label id="player2Name" fx:id="deck1" alignment="CENTER" prefHeight="29.0" prefWidth="214.0" text="Monsters in deck:" textAlignment="CENTER">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label id="player2Name" fx:id="killedMonsters1" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="29.0" prefWidth="214.0" text="Killed monsters:" textAlignment="CENTER">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                   <Label id="player1Name" fx:id="Player1" alignment="CENTER" ellipsisString="" prefHeight="43.0" prefWidth="176.0" text="Player 1 " textAlignment="CENTER">
                      <font>
                         <Font size="39.0" />

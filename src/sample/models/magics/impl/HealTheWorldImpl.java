@@ -8,7 +8,8 @@ public class HealTheWorldImpl implements HealTheWorld, BasicMagic {
 
     private BasicMonster healedMonster;
 
-    public void setHealedMonster(BasicMonster healedMonster) {
+    @Override
+    public void setMonster(BasicMonster healedMonster) {
         this.healedMonster = healedMonster;
     }
 

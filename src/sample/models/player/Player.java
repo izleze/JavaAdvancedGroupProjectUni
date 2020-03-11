@@ -15,6 +15,8 @@ public class Player implements SacrificeMonster{
 
     private int magicPower = 10;
 
+    private int killedMonsters = 0;
+
     private final List<BasicMonster> currentAliveMonsters = new ArrayList<>();
 
     public Player() {
@@ -27,6 +29,10 @@ public class Player implements SacrificeMonster{
 
     public void firstTurn() {
 
+    }
+
+    public Deck getDeck() {
+        return deck;
     }
 
     @Override
@@ -49,5 +55,17 @@ public class Player implements SacrificeMonster{
 
     public void setMagicPower(int magicPower) {
         this.magicPower = magicPower;
+    }
+
+    public int getKilledMonsters() {
+        return killedMonsters;
+    }
+
+    public void setKilledMonsters(int killedMonsters) {
+        this.killedMonsters = killedMonsters;
+    }
+
+    public void increaseKilledMonsters() {
+        this.killedMonsters++;
     }
 }

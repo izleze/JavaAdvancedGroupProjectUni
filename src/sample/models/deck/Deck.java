@@ -40,6 +40,11 @@ public class Deck {
             new WarrrrImpl()
     ));
 
+
+    public List<BasicMonster> getMonsters() {
+        return monsters;
+    }
+
     public List<BasicMonster> drawInitialMonsters() {
         List<BasicMonster> drawMonsters = new ArrayList<>(5);
         for (int i = 0; i < 5; i++) {

@@ -8,7 +8,8 @@ public class WarrrrImpl implements Warrrr, BasicMagic {
 
     private BasicMonster gearUpMonster;
 
-    public void setGearUpMonster(BasicMonster gearUpMonster) {
+    @Override
+    public void setMonster(BasicMonster gearUpMonster) {
         this.gearUpMonster = gearUpMonster;
     }
 

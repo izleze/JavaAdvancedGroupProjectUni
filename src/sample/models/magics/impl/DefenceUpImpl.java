@@ -8,7 +8,8 @@ public class DefenceUpImpl implements DefenceUp, BasicMagic {
 
     private BasicMonster defenceUpMonster;
 
-    public void setDefenceUpMonster(BasicMonster defenceUpMonster) {
+    @Override
+    public void setMonster(BasicMonster defenceUpMonster) {
         this.defenceUpMonster = defenceUpMonster;
     }
 

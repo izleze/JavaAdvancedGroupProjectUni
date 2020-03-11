@@ -3,7 +3,9 @@ package sample.models.monsters;
 import sample.models.actions.Attack;
 import sample.models.magics.*;
 
-public class BasicMonster implements Attack, HealTheWorld, MoveMagic, DefenceUp, AttackOn, Warrrr {
+import java.io.Serializable;
+
+public class BasicMonster implements Serializable, Attack, HealTheWorld, MoveMagic, DefenceUp, AttackOn, Warrrr {
 
     protected int attackPower;
     protected int defencePower;

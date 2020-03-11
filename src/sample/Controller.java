@@ -1,10 +1,16 @@
 package sample;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -14,18 +20,26 @@ import sample.models.magics.BasicMagic;
 import sample.models.monsters.BasicMonster;
 import sample.models.player.Player;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Controller implements Initializable {
 
+    private static final DataFormat BASIC_MONSTER = new DataFormat("basicMonster");
+
     private Player player1 = new Player();
     private Player player2 = new Player();
+
+    ObjectMapper objectMapper = new ObjectMapper();
 
     int rndm1;
     int rndm2;
     int time = 180;
+
+    private static final String defaultMonstersText = "Monsters in deck: ";
+    private static final String defaultKilledMonstersText = "Killed Monsters: ";
 
     @FXML
     public BorderPane mainPanel;
@@ -36,6 +50,10 @@ public class Controller implements Initializable {
     public Label timer;
     public Label randomNum1;
     public Label randomNum2;
+    public Label deck1;
+    public Label deck2;
+    public Label killedMonsters1;
+    public Label killedMonsters2;
     public Button startGame;
     public Button placeMonsters;
     public Button placeMonster;
@@ -58,6 +76,28 @@ public class Controller implements Initializable {
         randomNum1.setText(randomNum1.getText() + " " + new Random().nextInt(6));
         randomNum2.setText(randomNum2.getText() + " " + new Random().nextInt(6));
         timer.setText(String.valueOf(time));
+
+        deck1.setText(defaultMonstersText + player1.getDeck().getMonsters().size());
+        deck2.setText(defaultMonstersText + player2.getDeck().getMonsters().size());
+
+        killedMonsters1.setText(defaultKilledMonstersText + player1.getKilledMonsters());
+        killedMonsters2.setText(defaultKilledMonstersText + player2.getKilledMonsters());
+
+        mainGrid.setOnDragOver(dragEvent -> {
+            dragEvent.acceptTransferModes(TransferMode.MOVE);
+            dragEvent.consume();
+        });
+
+        mainGrid.setOnDragDropped(dragEvent -> {
+            Dragboard dragboard = dragEvent.getDragboard();
+            try {
+                mainGrid.add(objectMapper.readValue((String) dragboard.getContent(BASIC_MONSTER), Button.class),
+                        ((int) dragEvent.getSceneX()), (int) dragEvent.getSceneY());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
     public void startGame() {
@@ -115,7 +155,7 @@ public class Controller implements Initializable {
 
     public void endTurn() {
 
-        startTimer();
+
     }
 
     private void startTimer() {
@@ -131,7 +171,6 @@ public class Controller implements Initializable {
                     });
                 }
                 else {
-                    endOfTurn();
                     timerForTime.cancel();
                 }
             }
@@ -143,7 +182,7 @@ public class Controller implements Initializable {
         magicPlayer2.textProperty().setValue(String.valueOf(player2.getMagicPower()));
     }
 
-    private MagicArea createMagicText(BasicMagic basicMagic) {
+    private MagicArea createMagicArea(BasicMagic basicMagic) {
         MagicArea magicArea = new MagicArea(basicMagic);
         magicArea.setText(basicMagic.getClass().getSimpleName().replace("Impl", "") +
                 "\nRequires magic points: " + basicMagic.magicPoints());
@@ -154,7 +193,7 @@ public class Controller implements Initializable {
     private List<MagicArea> createMagicsForUser(Player player) {
         List<MagicArea> magics = new ArrayList<>();
         player.getRandomMagic()
-                .ifPresent(basicMagic -> magics.add(createMagicText(basicMagic))
+                .ifPresent(basicMagic -> magics.add(createMagicArea(basicMagic))
         );
         return magics;
     }
@@ -162,13 +201,12 @@ public class Controller implements Initializable {
     private List<MonsterArea> createMonstersForUser(Player player) {
         List<MonsterArea> monsters = new ArrayList<>();
         for (BasicMonster monster : player.getCurrentAliveMonsters()) {
-            monsters.add(createMonsterText(monster));
+            monsters.add(createMonsterArea(monster));
         }
         return monsters;
     }
 
-    private MonsterArea createMonsterText(BasicMonster basicMonster) {
-//        AtomicReference<Node> node = null;
+    private MonsterArea createMonsterArea(BasicMonster basicMonster) {
         MonsterArea monsterArea = new MonsterArea(basicMonster);
         monsterArea.setText(basicMonster.getClass()
                 .getSimpleName() +
@@ -180,33 +218,28 @@ public class Controller implements Initializable {
                 basicMonster.getMagicPower() +
                 "\nSpeed: " +
                 basicMonster.getSpeed());
-        monsterArea.setEditable(false);
-//        textArea.setDisable(true);
-//        textArea.setOpacity(1);
-//        textArea.setOnMouseClicked(
-//                mouseEvent -> {
-//                    Stage dialogStage = new Stage();
-//
-//                    Scene scene =new Scene(root,300,150);
-//                    dialogStage.setScene(scene);
-//                    dialogStage.setTitle("alert");
-//                    dialogStage.initModality(Modality.WINDOW_MODAL);
-//                    Label lab_alert= new Label("title");
-//                    grd_pan.add(lab_alert, 0, 1);
-//                    Button btn_ok = new Button("fermer");
-//                    btn_ok.setOnAction(new EventHandler<ActionEvent>() {
-//                        grd_pan.add(btn_ok, 0, 2);
-//                        dialogStage
-//                    });
-//                }
-//        );
-//        textArea.setOnMouseDragReleased(
-//                dragEvent -> {
-//                    Integer cIndex = GridPane.getColumnIndex(node.get());
-//                    Integer rIndex = GridPane.getRowIndex(node.get());
-//                    mainGrid.add(node.get(), cIndex, rIndex);
-//                    dragEvent.consume();
-//                });
+
+        monsterArea.setOnDragDetected(event -> {
+            Dragboard dragboard = monsterArea.startDragAndDrop(TransferMode.ANY);
+
+            ClipboardContent clipboard = new ClipboardContent();
+
+            try {
+                clipboard.put(DataFormat.PLAIN_TEXT, objectMapper.writeValueAsString(monsterArea));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+
+            dragboard.setContent(clipboard);
+
+            event.consume();
+        });
+
+        monsterArea.setOnDragDone(dragEvent -> {
+            HBox parent = (HBox) monsterArea.getParent();
+            parent.getChildren().remove(monsterArea);
+        });
+
         return monsterArea;
     }
 }
